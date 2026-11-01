@@ -25,6 +25,8 @@ body.touch-mode .controls-hint,body.touch-mode #screenshotButton,body.touch-mode
 body.touch-mode #interactionPrompt kbd{display:none}
 body.touch-mode .objective-card,body.touch-mode .status-card,body.touch-mode .ammo-card,body.touch-mode #routeGuide{backdrop-filter:none}
 body.touch-mode .film-grain{display:none}
+body.touch-mode .signature:not(.signature-end){margin-top:14px;font-size:9px;letter-spacing:.28em}
+body.touch-mode .signature-end{margin-top:22px;font-size:10px;letter-spacing:.3em}
 
 /* 顶部：目标卡与状态卡共用一块背景，纵向压到 100px 以内 */
 body.touch-mode .objective-card{left:calc(10px + env(safe-area-inset-left,0px));top:calc(8px + env(safe-area-inset-top,0px));width:min(250px,33vw);padding:5px 9px;background:linear-gradient(160deg,rgba(30,26,46,.82),rgba(36,32,56,.66));border-color:rgba(244,236,217,.14);border-bottom-color:rgba(244,236,217,.06);border-radius:10px 10px 0 0;box-shadow:0 2px 10px rgba(0,0,0,.16)}
@@ -84,6 +86,8 @@ body.touch-mode #toast{top:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px
   body.touch-mode .mode-select{margin:10px 0;gap:8px}
   body.touch-mode .mode-select button{padding:8px 11px}
   body.touch-mode .menu-links{margin-top:9px}
+  body.touch-mode .signature:not(.signature-end){margin-top:9px;font-size:8px;letter-spacing:.24em}
+  body.touch-mode .signature-end{margin-top:16px;font-size:9px}
   body.touch-mode .paper-panel{padding:18px;max-height:94dvh;overflow:auto}
   body.touch-mode .paper-panel h2{margin-bottom:8px;font-size:22px}
   body.touch-mode .setting-row{padding:8px 0}
@@ -95,4 +99,20 @@ body.touch-mode #toast{top:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px
   body.touch-mode .ending-content>p:not(.eyebrow){font-size:11px;line-height:1.55}
   body.touch-mode .ending-rescue{margin:10px 0;padding:9px 12px}
   body.touch-mode .ending-quote{margin:10px 0}
+}
+
+/* 矮屏结局：内容压进一屏，署名不能滚到屏幕外 */
+@media(max-height:420px){
+  body.touch-mode .ending-content{width:min(560px,88%);margin:6px auto}
+  body.touch-mode .ending-content .eyebrow{margin-bottom:4px;font-size:8px;letter-spacing:.12em}
+  body.touch-mode .ending-content h1{font-size:27px;line-height:1.12;letter-spacing:-.045em}
+  body.touch-mode .ending-content>p:not(.eyebrow){margin:5px 0;max-width:460px;font-size:9px;line-height:1.5}
+  body.touch-mode .ending-rescue{margin:6px 0;padding:5px 10px;gap:10px;font-size:10px}
+  body.touch-mode .ending-rescue strong{font-size:12px}
+  body.touch-mode .ending-details{margin:5px 0;gap:14px;font-size:8px}
+  body.touch-mode .ending-details b{font-size:11px}
+  body.touch-mode .ending-quote{margin:6px 0;font-size:10px;line-height:1.5}
+  body.touch-mode .ending-content .primary-button{min-width:190px;padding:8px 16px;font-size:11px}
+  body.touch-mode .ending-link{margin-left:12px;font-size:9px}
+  body.touch-mode .signature-end{margin-top:10px;font-size:9px;letter-spacing:.26em}
 }

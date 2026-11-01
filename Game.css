@@ -155,6 +155,8 @@ kbd{display:grid;place-items:center;min-width:28px;height:28px;padding:0 6px;col
 .ending-quote{margin:25px 0;color:var(--gold)!important;font-family:serif}
 .ending-content .primary-button{min-width:260px}
 .ending-link{display:inline-block;margin-left:20px;color:#a496ae;font-size:10px}
+.signature{margin:20px 0 0;color:rgba(244,236,217,.58);font:700 10px/1 ui-monospace,monospace;letter-spacing:.34em;text-transform:uppercase;user-select:none;-webkit-user-select:none}
+.signature-end{margin:32px 0 0;color:rgba(244,200,106,.72);font-size:11px;letter-spacing:.36em}
 .ending-sky{position:absolute;right:0;top:0;bottom:0;width:44%;overflow:hidden}
 .ending-moon{position:absolute;right:14%;top:12%;width:230px;height:230px;background:var(--gold);border-radius:50%;box-shadow:0 0 100px rgba(244,200,106,.25)}
 .ending-stars{position:absolute;top:8%;left:5%;color:var(--gold);font-size:35px;opacity:.7}

@@ -225,6 +225,7 @@ svg { display: block; }
 .next-stamp small { color: #a89cad; font-size: 10px; }
 footer { min-height: 85px; padding: 25px max(32px, calc((100vw - 1240px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
 footer a { color: var(--plum); font-weight: 700; }
+footer .footer-signature { font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; }
 .toast { position: fixed; left: 50%; bottom: 28px; z-index: 100; padding: 10px 18px; color: var(--cream); background: var(--night); border: 1px solid rgba(244,236,217,.2); border-radius: 999px; box-shadow: var(--shadow); font-size: 12px; opacity: 0; transform: translate(-50%, 15px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
