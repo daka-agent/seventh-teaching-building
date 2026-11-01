@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#242038">
+  <meta name="description" content="万圣夜：第七教学楼，一款怪诞可爱的第一人称校园探索游戏。">
+  <title>万圣夜：第七教学楼</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23242038'/%3E%3Cpath d='M32 15c-15 0-22 9-22 20s8 17 22 17 22-6 22-17S47 15 32 15Z' fill='%23e8894e'/%3E%3Cpath d='m20 32 7-5 5 7-8 2Zm24 0-7-5-5 7 8 2Z' fill='%23242038'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="Game.css">
+  <link rel="stylesheet" href="Mobile.css">
+</head>
+<body>
+  <main id="gameShell">
+    <canvas id="gameCanvas" width="1280" height="720" aria-label="第七教学楼第一人称游戏画面"></canvas>
+    <div class="film-grain" aria-hidden="true"></div>
+    <div id="damageVignette" aria-hidden="true"></div>
+    <div id="fadeLayer" aria-hidden="true"></div>
+
+    <section id="hud" class="hidden" aria-label="游戏状态">
+      <div class="objective-card">
+        <span class="hud-label">CURRENT / 当前目标</span>
+        <strong id="objectiveText">前往保安室</strong>
+        <div class="rescue-row" aria-label="救援进度">
+          <span>晚会布置小组</span>
+          <i data-rescue="student1"></i><i data-rescue="student2"></i><i data-rescue="student3"></i>
+          <b id="rescueCount">0 / 3</b>
+        </div>
+      </div>
+      <div class="room-card"><span id="roomName">教学楼大厅</span><small id="clockText">23:47 · 万圣夜</small></div>
+      <div id="routeGuide" aria-label="路线引导">
+        <span id="compassText">北 N</span>
+        <div class="guide-direction"><i id="guideArrow">↑</i><span><b id="guideTarget">保安室</b><small><em id="guideDistance">0 米</em> · 跟随橙色爪印</small></span></div>
+      </div>
+      <div class="status-card">
+        <div class="meter-row"><span>状态</span><div class="meter"><i id="healthBar"></i></div><b id="healthText">100</b></div>
+        <div class="meter-row stamina"><span>体力</span><div class="meter"><i id="staminaBar"></i></div><b>＋</b></div>
+        <div class="inventory-row"><span>糖果 <b id="candyCount">0</b></span><span>南瓜弹 <b id="bombCount">1</b></span><span id="keyText">无钥匙</span></div>
+      </div>
+      <div class="ammo-card" id="ammoCard"><span id="weaponState">南瓜净化器</span><div class="ammo-numbers"><span><strong id="magText">6</strong><small>弹仓</small></span><i>/</i><span><b id="reserveText">12</b><small>备用</small></span></div><small id="ammoHint">R 换弹（弹仓最多 6 发） · Q 南瓜弹</small></div>
+      <div id="crosshair" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+      <div id="interactionPrompt" class="hidden"><kbd>E</kbd><span>开门</span></div>
+      <div id="defenseTimer" class="hidden"><span>求救信号发送中</span><strong>45</strong><small>留在广播室</small></div>
+      <button id="screenshotButton" class="screenshot-button" title="截取当前画面（F8）">截图 <kbd>F8</kbd></button>
+      <div class="controls-hint" id="controlsHint">WASD 移动 · Shift 冲刺 · C 糖果 · F 手电 · M 地图 · Esc 暂停</div>
+    </section>
+
+    <div id="touchControls" class="hidden" aria-label="手机触屏操作">
+      <div id="lookZone" aria-label="拖动观察"></div>
+      <div id="moveZone" aria-label="移动摇杆">
+        <div id="joystickBase"><i id="joystickKnob"></i></div>
+      </div>
+      <div class="touch-top">
+        <button type="button" class="touch-button" data-game-action="map" aria-label="打开地图">地图</button>
+        <button type="button" class="touch-button" data-game-action="pause" aria-label="暂停游戏">暂停</button>
+      </div>
+      <div class="touch-actions">
+        <div class="touch-utilities">
+          <button type="button" class="touch-button" data-game-action="reload">换弹</button>
+          <button type="button" class="touch-button" data-game-action="bomb">南瓜</button>
+          <button type="button" class="touch-button" data-game-action="candy">糖果</button>
+          <button type="button" class="touch-button" data-game-action="flashlight">手电</button>
+        </div>
+        <button type="button" class="touch-button touch-interact" id="touchInteractButton" data-game-action="interact">互动</button>
+        <button type="button" class="touch-button touch-fire" data-game-action="fire">射击</button>
+      </div>
+    </div>
+
+    <div id="subtitle" class="hidden" role="status" aria-live="polite"><span id="subtitleSpeaker">旁白</span><p id="subtitleText"></p></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <div id="hitMarker" aria-hidden="true">×</div>
+
+    <section id="startScreen" class="screen">
+      <div class="menu-scene" aria-hidden="true">
+        <div class="moon"></div><div class="school-silhouette"><i></i><i></i><i></i><i></i><i></i><b>第七教学楼</b></div>
+        <div class="menu-pumpkin">•‿•</div>
+        <div class="menu-cat"><i></i><span>叉烧</span></div>
+      </div>
+      <div class="menu-content">
+        <p class="eyebrow">A CAMPUS HALLOWEEN STORY</p>
+        <h1>万圣夜：<br><em>第七教学楼</em></h1>
+        <p class="menu-lead">晚会散场后，教室里还有人在走动。<br>推开门，找到他们，一起回家。</p>
+        <div class="story-note"><span>23:47</span><p>广播里传来失真的求救声。三名晚会布置小组的同学，还没有离开教学楼。</p></div>
+        <div class="mode-select" aria-label="体验模式">
+          <button class="selected" data-mode="atmosphere"><strong>氛围模式</strong><small>资源充足 · 辅助瞄准 · 轻松探索</small></button>
+          <button data-mode="standard"><strong>标准模式</strong><small>资源有限 · 敌人积极 · 生存压力</small></button>
+        </div>
+        <div class="menu-actions">
+          <button id="newGameButton" class="primary-button">开始救援 <span>→</span></button>
+          <button id="continueButton" class="secondary-button hidden">继续上次探索</button>
+        </div>
+        <div class="menu-links"><button id="openSettingsButton">体验设置</button><a href="design/">查看视觉设定板</a></div>
+      </div>
+      <div class="menu-footer"><span>无血腥 · 无跳脸 · 无排行榜</span><span id="startInputHint">建议佩戴耳机 · 点击开始后锁定鼠标</span></div>
+    </section>
+
+    <section id="rotateScreen" class="screen overlay-screen hidden">
+      <div class="rotate-panel">
+        <div class="rotate-phone" aria-hidden="true"></div>
+        <h2>把手机横过来</h2>
+        <p>横屏后点击继续探索。<br>左手移动，右手拖动观察，按钮射击与互动。</p>
+      </div>
+    </section>
+
+    <section id="pauseScreen" class="screen overlay-screen hidden">
+      <div class="paper-panel compact-panel">
+        <p class="eyebrow">PAUSED / 喘一口气</p><h2>教学楼的夜晚暂停了</h2>
+        <p id="pauseObjective">当前目标：前往保安室</p>
+        <button id="resumeButton" class="primary-button">继续探索 <span>→</span></button>
+        <button id="pauseScreenshotButton" class="secondary-button">截取当前画面（F8）</button>
+        <button id="pauseSettingsButton" class="secondary-button">体验设置</button>
+        <button id="restartButton" class="text-button">重新开始本次救援</button>
+        <button id="backMenuButton" class="text-button">返回标题界面</button>
+      </div>
+    </section>
+
+    <section id="settingsScreen" class="screen overlay-screen hidden">
+      <div class="paper-panel settings-panel">
+        <p class="eyebrow">ACCESSIBILITY / 体验设置</p><h2>让这个夜晚适合你</h2>
+        <label class="setting-row"><span><strong>声音</strong><small>枪声、环境音与重要提示</small></span><input id="soundSetting" type="checkbox" checked></label>
+        <label class="setting-row"><span><strong>字幕</strong><small>显示角色对话与关键声音</small></span><input id="subtitleSetting" type="checkbox" checked></label>
+        <label class="setting-row"><span><strong>路线引导</strong><small>显示目标方向、距离与叉烧爪印</small></span><input id="guideSetting" type="checkbox" checked></label>
+        <label class="setting-row"><span><strong>减少晃动</strong><small>关闭步伐晃动与强烈屏幕反馈</small></span><input id="motionSetting" type="checkbox"></label>
+        <label class="setting-row slider-row"><span><strong>画面亮度</strong><small>提高暗部可见度</small></span><input id="brightnessSetting" type="range" min="80" max="150" value="120"><b id="brightnessValue">120%</b></label>
+        <label class="setting-row slider-row"><span><strong id="sensitivityLabel">鼠标灵敏度</strong><small>也可使用左右方向键转向</small></span><input id="sensitivitySetting" type="range" min="20" max="100" value="55"><b id="sensitivityValue">55%</b></label>
+        <button id="closeSettingsButton" class="primary-button">保存并返回</button>
+      </div>
+    </section>
+
+    <section id="mapScreen" class="screen overlay-screen hidden">
+      <div class="map-panel">
+        <div class="map-heading"><div><p class="eyebrow">FLOOR 01 / 折页探索地图</p><h2>第七教学楼 · 一层</h2></div><button type="button" id="closeMapButton" class="secondary-button">M / Tab 关闭</button></div>
+        <canvas id="mapCanvas" width="900" height="560" aria-label="教学楼地图"></canvas>
+        <div class="map-legend"><span><i class="you"></i>你的位置</span><span><i class="target"></i>当前目标</span><span><i class="safe"></i>安全屋</span><span>只显示已经到达的区域</span></div>
+      </div>
+    </section>
+
+    <section id="endingScreen" class="screen hidden">
+      <div class="ending-sky"><div class="ending-moon"></div><div class="ending-stars">✦　·　✧　·　✦</div></div>
+      <div class="ending-content">
+        <p class="eyebrow">DAWN IS NOT FAR AWAY</p><h1>广播响了，<br>大家一起回家。</h1>
+        <p>教学楼的门在身后慢慢合上。叉烧跟在队伍最后，回头看了一眼那些重新安静的教室。</p>
+        <div class="ending-rescue"><span>晚会布置小组</span><strong>3 人全部找到</strong><i>✓</i></div>
+        <div class="ending-details"><span>探索用时 <b id="endingTime">00:00</b></span><span>净化玩偶 <b id="endingPurified">0</b></span><span>叉烧的陪伴 <b>一直都在</b></span></div>
+        <p class="ending-quote">“明年万圣节，还是在有灯的地方办晚会吧。”</p>
+        <button id="endingRestartButton" class="primary-button">再走进一次教学楼 <span>→</span></button>
+        <a class="ending-link" href="design/">回到视觉设定板</a>
+      </div>
+    </section>
+
+    <section id="doorTransition" class="hidden" aria-hidden="true"><div class="transition-door"><span></span><b>104</b><i></i></div><p>门后的空间正在显现……</p></section>
+
+    <section id="screenshotScreen" class="screen overlay-screen hidden" aria-label="截图预览">
+      <div class="screenshot-panel">
+        <div class="screenshot-heading"><div><p class="eyebrow">SCREENSHOT / 画面已截取</p><h2>检查这张游戏截图</h2></div><span>PNG · 含位置与视角信息</span></div>
+        <img id="screenshotPreview" alt="游戏当前画面截图预览">
+        <p>下载后可以直接把 PNG 图片发给我，用于定位墙壁、门洞或视觉问题。手机与微信内可长按图片保存或分享。</p>
+        <div class="screenshot-actions"><a id="downloadScreenshot" class="primary-button" download="第七教学楼-截图.png">下载 PNG <span>↓</span></a><button id="closeScreenshotButton" class="secondary-button">返回游戏</button></div>
+      </div>
+    </section>
+  </main>
+  <script src="Map.js"></script>
+  <script src="Player.js"></script>
+  <script src="Input.js"></script>
+  <script src="WeaponSystem.js"></script>
+  <script src="Zombie.js"></script>
+  <script src="Renderer.js"></script>
+  <script src="WebGLRenderer.js"></script>
+  <script src="AudioSystem.js"></script>
+  <script src="Game.js"></script>
+</body>
+</html>
