@@ -2,20 +2,20 @@
 #gameCanvas,#moveZone,#lookZone,.touch-button{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #touchControls{position:absolute;inset:0;z-index:30;pointer-events:none;overflow:hidden}
 #lookZone{position:absolute;inset:0 0 0 34%;pointer-events:auto}
-#moveZone{position:absolute;left:0;bottom:0;width:220px;height:220px;pointer-events:auto}
-#joystickBase{position:absolute;left:calc(22px + env(safe-area-inset-left,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));width:124px;height:124px;border:2px solid rgba(244,236,217,.32);border-radius:50%;background:radial-gradient(circle,rgba(244,236,217,.04) 0 35%,rgba(36,32,56,.52) 36% 100%);box-shadow:inset 0 0 24px rgba(0,0,0,.25),0 0 20px rgba(232,137,78,.08)}
-#joystickBase::after{content:"移动";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:rgba(244,236,217,.28);font-size:11px}
-#joystickKnob{position:absolute;left:34px;top:34px;width:52px;height:52px;border:2px solid rgba(244,236,217,.55);border-radius:50%;background:rgba(232,137,78,.68);box-shadow:0 4px 18px rgba(0,0,0,.28);will-change:transform}
-.touch-top{position:absolute;right:calc(12px + env(safe-area-inset-right,0px));top:calc(10px + env(safe-area-inset-top,0px));display:flex;gap:8px;pointer-events:auto}
-.touch-top .touch-button{position:static;width:52px;height:40px;padding:0;font-size:11px}
-.touch-actions{position:absolute;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:238px;height:194px;pointer-events:none}
-.touch-button{display:grid;place-items:center;padding:0;color:var(--cream);background:rgba(36,32,56,.72);border:1px solid rgba(244,236,217,.35);border-radius:14px;box-shadow:0 5px 18px rgba(0,0,0,.25);backdrop-filter:blur(4px);pointer-events:auto;font-size:12px;font-weight:800}
-.touch-button.active{color:#fff8ea;background:rgba(201,101,57,.88);border-color:var(--gold);transform:scale(.94)}
-.touch-fire{position:absolute;right:0;bottom:0;width:86px;height:86px;border-radius:50%;background:rgba(201,101,57,.78);border:2px solid rgba(244,200,106,.68);font-size:16px}
-.touch-interact{position:absolute;right:102px;bottom:8px;width:70px;height:70px;border-radius:50%;border-color:rgba(169,201,174,.65)}
-.touch-interact.ready{color:var(--night);background:rgba(169,201,174,.88);border-color:var(--cream);box-shadow:0 0 20px rgba(169,201,174,.32)}
-.touch-utilities{position:absolute;right:0;bottom:102px;display:grid;grid-template-columns:repeat(4,50px);gap:8px;pointer-events:none}
-.touch-utilities .touch-button{width:50px;height:44px;font-size:11px}
+#moveZone{position:absolute;left:0;bottom:0;width:190px;height:190px;pointer-events:auto}
+#joystickBase{position:absolute;left:calc(14px + env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));width:104px;height:104px;border:2px solid rgba(244,236,217,.3);border-radius:50%;background:radial-gradient(circle,rgba(244,236,217,.04) 0 35%,rgba(36,32,56,.46) 36% 100%);box-shadow:inset 0 0 20px rgba(0,0,0,.2),0 0 16px rgba(232,137,78,.06)}
+#joystickBase::after{content:"移动";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:rgba(244,236,217,.26);font-size:10px}
+#joystickKnob{position:absolute;left:28px;top:28px;width:44px;height:44px;border:2px solid rgba(244,236,217,.5);border-radius:50%;background:rgba(232,137,78,.62);box-shadow:0 3px 14px rgba(0,0,0,.24);will-change:transform}
+.touch-top{position:absolute;right:calc(10px + env(safe-area-inset-right,0px));top:calc(8px + env(safe-area-inset-top,0px));display:flex;gap:6px;pointer-events:auto}
+.touch-top .touch-button{position:static;width:48px;height:36px;padding:0;font-size:10px;border-radius:12px}
+.touch-actions{position:absolute;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));width:158px;height:160px;pointer-events:none}
+.touch-button{display:grid;place-items:center;padding:0;color:var(--cream);background:rgba(36,32,56,.58);border:1px solid rgba(244,236,217,.28);border-radius:13px;box-shadow:0 4px 14px rgba(0,0,0,.2);backdrop-filter:blur(3px);pointer-events:auto;font-size:12px;font-weight:800}
+.touch-button.active{color:#fff8ea;background:rgba(201,101,57,.82);border-color:var(--gold);transform:scale(.94)}
+.touch-fire{position:absolute;right:0;bottom:0;width:78px;height:78px;border-radius:50%;background:rgba(201,101,57,.66);border:2px solid rgba(244,200,106,.6);font-size:15px}
+.touch-interact{position:absolute;right:84px;bottom:4px;width:62px;height:62px;border-radius:50%;border-color:rgba(169,201,174,.6)}
+.touch-interact.ready{color:var(--night);background:rgba(169,201,174,.85);border-color:var(--cream);box-shadow:0 0 18px rgba(169,201,174,.3)}
+.touch-utilities{position:absolute;right:0;bottom:82px;display:grid;grid-template-columns:repeat(2,42px);gap:4px;pointer-events:none}
+.touch-utilities .touch-button{width:42px;height:38px;font-size:10px;border-radius:11px}
 #rotateScreen{z-index:100;background:radial-gradient(circle at 50% 30%,#393047,#171525 70%)}
 .rotate-panel{padding:30px;text-align:center}
 .rotate-phone{width:54px;height:88px;margin:0 auto 22px;border:3px solid var(--orange);border-radius:10px;transform:rotate(90deg);box-shadow:0 0 24px rgba(232,137,78,.25)}
@@ -25,26 +25,55 @@ body.touch-mode .controls-hint,body.touch-mode #screenshotButton,body.touch-mode
 body.touch-mode #interactionPrompt kbd{display:none}
 body.touch-mode .objective-card,body.touch-mode .status-card,body.touch-mode .ammo-card,body.touch-mode #routeGuide{backdrop-filter:none}
 body.touch-mode .film-grain{display:none}
-body.touch-mode .objective-card{left:calc(12px + env(safe-area-inset-left,0px));top:calc(10px + env(safe-area-inset-top,0px));width:min(300px,37vw);padding:8px 11px}
-body.touch-mode .objective-card>strong{margin-top:3px;font-size:12px;line-height:1.35}
-body.touch-mode .rescue-row{margin-top:5px;padding-top:5px;gap:5px;font-size:9px}
-body.touch-mode .status-card{left:calc(12px + env(safe-area-inset-left,0px));top:calc(96px + env(safe-area-inset-top,0px));bottom:auto;width:210px;padding:8px 10px;transform:none}
-body.touch-mode .meter-row{grid-template-columns:28px 1fr 25px;gap:5px;font-size:9px}
-body.touch-mode .meter-row+.meter-row{margin-top:4px}
-body.touch-mode .inventory-row{margin-top:5px;padding-top:5px;gap:8px;font-size:8px}
-body.touch-mode .ammo-card{right:calc(12px + env(safe-area-inset-right,0px));top:calc(58px + env(safe-area-inset-top,0px));bottom:auto;min-width:140px;padding:7px 10px;transform:none}
-body.touch-mode .ammo-card strong{font-size:32px}
-body.touch-mode .ammo-card b{font-size:18px}
+
+/* 顶部：目标卡与状态卡共用一块背景，纵向压到 100px 以内 */
+body.touch-mode .objective-card{left:calc(10px + env(safe-area-inset-left,0px));top:calc(8px + env(safe-area-inset-top,0px));width:min(250px,33vw);padding:5px 9px;background:linear-gradient(160deg,rgba(30,26,46,.82),rgba(36,32,56,.66));border-color:rgba(244,236,217,.14);border-bottom-color:rgba(244,236,217,.06);border-radius:10px 10px 0 0;box-shadow:0 2px 10px rgba(0,0,0,.16)}
+body.touch-mode .objective-card>strong{margin-top:2px;font-size:11px;line-height:1.3}
+body.touch-mode .rescue-row{margin-top:4px;padding-top:4px;gap:4px;font-size:8px}
+body.touch-mode .status-card{left:calc(10px + env(safe-area-inset-left,0px));top:calc(73px + env(safe-area-inset-top,0px));bottom:auto;width:min(250px,33vw);padding:5px 9px 6px;transform:none;background:linear-gradient(160deg,rgba(36,32,56,.66),rgba(30,26,46,.55));border-color:rgba(244,236,217,.14);border-top:none;border-radius:0 0 10px 10px;box-shadow:0 4px 12px rgba(0,0,0,.16)}
+body.touch-mode .meter-row{grid-template-columns:22px 1fr 20px;gap:4px;font-size:8px}
+body.touch-mode .meter-row+.meter-row{margin-top:3px}
+body.touch-mode .inventory-row{margin-top:4px;padding-top:4px;gap:6px;font-size:8px}
+body.touch-mode #routeGuide{left:50%;right:auto;top:calc(8px + env(safe-area-inset-top,0px));bottom:auto;min-width:0;padding:4px 9px;gap:6px;transform:translateX(-50%);background:rgba(29,25,43,.62);border-color:rgba(244,200,106,.2);border-radius:9px}
+body.touch-mode #routeGuide #compassText{display:none}
+body.touch-mode .guide-direction{gap:6px}
+body.touch-mode .guide-direction>i{font-size:17px}
+body.touch-mode .guide-direction b{font-size:10px;line-height:1.3}
+body.touch-mode .guide-direction small{font-size:9px;line-height:1.3}
+body.touch-mode .guide-direction small em{font-style:normal}
+
+/* 弹药：去掉卡片底色，只留数字，不再和按钮组连成一坨 */
+body.touch-mode .ammo-card{right:calc(10px + env(safe-area-inset-right,0px));top:calc(52px + env(safe-area-inset-top,0px));bottom:auto;min-width:0;padding:0;transform:none;background:none;border:none;box-shadow:none;text-align:right;text-shadow:0 2px 10px rgba(0,0,0,.75)}
+body.touch-mode .ammo-card #weaponState{font-size:9px;opacity:.68;letter-spacing:.02em}
+body.touch-mode .ammo-card .ammo-numbers{gap:3px;margin-top:1px}
+body.touch-mode .ammo-card strong{font-size:29px;line-height:1}
+body.touch-mode .ammo-card b{font-size:14px}
+body.touch-mode .ammo-card small{font-size:9px;opacity:.75}
 body.touch-mode .ammo-card>small{display:none}
-body.touch-mode #routeGuide{left:50%;top:calc(10px + env(safe-area-inset-top,0px));bottom:auto;min-width:205px;padding:6px 10px;transform:translateX(-50%)}
-body.touch-mode .guide-direction>i{font-size:22px}
-body.touch-mode #defenseTimer{top:calc(66px + env(safe-area-inset-top,0px));min-width:150px;padding:6px 12px}
-body.touch-mode #defenseTimer strong{font-size:27px}
-body.touch-mode #interactionPrompt{bottom:27%;padding:6px 11px;font-size:11px}
-body.touch-mode #subtitle{bottom:calc(18px + env(safe-area-inset-bottom,0px));width:min(520px,48vw);padding:8px 12px}
-body.touch-mode #subtitle p{font-size:12px}
-body.touch-mode #toast{top:31%;max-width:48vw;font-size:11px}
+
+body.touch-mode #defenseTimer{top:calc(58px + env(safe-area-inset-top,0px));min-width:140px;padding:5px 11px}
+body.touch-mode #defenseTimer strong{font-size:24px}
+body.touch-mode #interactionPrompt{bottom:26%;padding:6px 11px;font-size:11px}
+body.touch-mode #subtitle{bottom:calc(8px + env(safe-area-inset-bottom,0px));width:min(430px,44vw);padding:6px 11px}
+body.touch-mode #subtitle p{font-size:11px;line-height:1.5}
+body.touch-mode #toast{top:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px));max-width:min(430px,44vw);padding:6px 11px;font-size:10px;background:rgba(30,26,46,.9);color:var(--cream);border-left-width:3px;border-color:var(--orange)}
 #closeMapButton{min-height:38px;padding:8px 13px;color:var(--plum);border-color:rgba(36,32,56,.2);font-size:11px}
+
+/* 更矮的横屏：再收一轮，保证中间留出可视画面 */
+@media(max-height:400px){
+  body.touch-mode .objective-card{width:min(228px,32vw);padding:4px 8px}
+  body.touch-mode .objective-card>strong{font-size:10px}
+  body.touch-mode .rescue-row{margin-top:3px;padding-top:3px;font-size:7px}
+  body.touch-mode .status-card{top:calc(68px + env(safe-area-inset-top,0px));width:min(228px,32vw);padding:4px 8px 5px}
+  body.touch-mode .meter-row{grid-template-columns:20px 1fr 18px;gap:3px;font-size:7px}
+  body.touch-mode .inventory-row{margin-top:3px;padding-top:3px;font-size:7px}
+  body.touch-mode .ammo-card{top:calc(48px + env(safe-area-inset-top,0px))}
+  body.touch-mode .ammo-card strong{font-size:26px}
+  body.touch-mode #subtitle{bottom:6px;width:min(380px,42vw);padding:5px 10px}
+  body.touch-mode #subtitle p{font-size:10px}
+  body.touch-mode #toast{bottom:6px;font-size:9px;max-width:min(380px,42vw)}
+}
+
 @media(max-height:500px){
   body.touch-mode #startScreen{grid-template-columns:1fr}
   body.touch-mode .menu-scene,body.touch-mode .menu-footer,body.touch-mode .story-note{display:none}
@@ -66,10 +95,4 @@ body.touch-mode #toast{top:31%;max-width:48vw;font-size:11px}
   body.touch-mode .ending-content>p:not(.eyebrow){font-size:11px;line-height:1.55}
   body.touch-mode .ending-rescue{margin:10px 0;padding:9px 12px}
   body.touch-mode .ending-quote{margin:10px 0}
-}
-@media(max-height:390px){
-  body.touch-mode .status-card{top:calc(82px + env(safe-area-inset-top,0px));width:190px}
-  body.touch-mode .objective-card{width:min(270px,35vw)}
-  body.touch-mode #routeGuide{min-width:185px}
-  body.touch-mode #subtitle{bottom:8px}
 }
